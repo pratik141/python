@@ -1,22 +1,25 @@
 #!/usr/bin/python
 
 import sys
-import os
 import smtplib
 from twilio.rest import TwilioRestClient
+from termcolor import colored
 from random import randint
 import getpass
 
 user= getpass.getuser()
+i = 1
 
-otpa=(randint(1000,99999))
-print otpa
+otp=(randint(1000,99999))
+print otp
 def clientIp():
+	global ip
 	sshvalue=os.environ["SSH_CLIENT"]
 	ip=str.split(sshvalue)
 	print ip[0]
 
 def Sms():
+	global ip
 	ACCOUNT_SID = "AC*****************************"
 	AUTH_TOKEN = "64******************************"
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
@@ -28,15 +31,16 @@ def Sms():
 	
 		#media_url="https://climacons.herokuapp.com/clear.png",
 		)
-Sms()
+
 def mail():
+	global ip
 	msg = "\r\n".join([
 	"From: *****@***.com",
 	"To: annadpratik141@gmail.com",
 	"Subject: OTP for ssh login",
 	"",
 	"User name: " + user, 
-	"otp: " + str(otpa),
+	"otp: " + str(otp),
 	"ip: " + str(ip[0])
 	
 	])
@@ -48,13 +52,29 @@ def mail():
 	print "mail Send :)"
 
 
-def otp():
+def otpFun():
+	global i
+	global otp
 	try:
-		a= raw_input("Enter the otp: ")
-		print a
-		# test
+		try:
+			i = i + 1 
+			pin= raw_input("Enter the otp: ")
+			if otp == int(pin):
+				print "Welcome to ", user ,"system"
+			else:
+				if i == 3:
+					print colored(' You have last attempt', 'red')
+				if i == 4:
+					sys.exit(0)
+				print "Wronge Pin"
+				otpFun()
+		except Exception, e:
+			print e
 	except KeyboardInterrupt:
 		print "Not Allowed"
-		otp()
-otp()
+		otpFun()
+
+### calling function
+Sms()
 mail()
+otpFun()
