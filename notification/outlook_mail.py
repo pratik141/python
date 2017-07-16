@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+"""
+  Author name : Pratik Anand
+  Authon Email: anandpratik141@gmail.com
+  Description : Mail notification Service via outlook mail server using O365
+
+"""
+
 import commonService as cs
 try:
   from O365 import Message, Attachment

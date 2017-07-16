@@ -79,13 +79,24 @@ def takeInput(msg,required):
       return takeInput(msg+'(required: %s)' %required,required)
 
 
+################################
+
+
 def getInput(appname):
   if appname is 'teams':
     appdata['URL'] = takeInput('Enter the URL','str')
-  elif appname is 'outlook_mail':
+
+  elif appname in ['outlook_mail','gmail_mail']:
     appdata['emailId'] = takeInput('Enter the email Id','str')
     question('Enter the email password')
     appdata['emailPassword'] = getpass.getpass()
+
+  elif appname in ['twilio_sms']:
+    appdata['sid'] = takeInput('Enter the ACCOUNT_SID:','str')
+    appdata['sender'] = takeInput('Enter the sender:','str')
+    question('Enter the AUTH_TOKEN')
+    appdata['token'] = getpass.getpass()
+
   return appdata
 
 def createConfig(appname,datadic):
