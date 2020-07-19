@@ -1,3 +1,8 @@
 *yaml
 *yml
 *pyc
+__pycache__/
+build/
+dist/
+file_render.egg-info/
+sonar.token
