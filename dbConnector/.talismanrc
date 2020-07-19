@@ -1,0 +1,3 @@
+fileignoreconfig:
+- filename: PostgreSQL/config.ini
+  checksum: 1c7db51f4d214f6e7f23239dc8d87c1b893d1c743255a32cdaa4bd0d0b9fe713
