@@ -43,28 +43,28 @@ def main():
 	opts, args = getopt.getopt(argv,"i:d:o:v:s:h",["ifile=", "dfile=", "ofile=","var=", "separator="])
 	
 	if opts == []:
-		print ('file_render -i <template file name> -d <data file name> -o <output file name>')
+		print ('file_render -i <input file name> -d <data file name> -o <output file name>')
 		sys.exit(2)
 
 	for opt, arg in opts:
 	  if opt == '-h':
-	    print ('[HELP] file_render  -i <template file name> -d <data file name> -o <output file name>')
+	    print ('[HELP] file_render -i <input file name> -d <data file name> -o <output file name>')
 	    sys.exit()
 
 	  elif opt in ("-i", "--ifile"):
-		filename = arg
+	  	filename = arg
 
 	  elif opt in ("-d", "--dfile"):
-		datafile = arg
+	  	datafile = arg
 
 	  elif opt in ("-o", "--ofile"):
-		outputfile = arg
+	  	outputfile = arg
 
 	  elif opt in ("-v", "--var"):
-		vardata = arg
+	  	vardata = arg
 
 	  elif opt in ("-s", "--separator"):
-		separator = arg
+	  	separator = arg
 
 
 	print (' input file :', filename)

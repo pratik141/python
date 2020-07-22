@@ -20,11 +20,13 @@ class TestFileRender(unittest.TestCase):
 		td.close()
 
 	def test_render_data(self):
+		vardict   = {}
+		separator = ":" 
 		try:
 			self.setup()
 			expected_data = """{\n  "var1": "val1",\n  "var2": "val2" \n}"""
 
-			render_data("test_template", "test_data", "outputfile")
+			render_data("test_template", "test_data", "outputfile", vardict, separator)
 			f = open("outputfile","r")
 			data = f.read()
 			f.close()
