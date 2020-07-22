@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Setup file_render
@@ -14,19 +14,17 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 
 setup(
     description='Load variables from YAML-formatted files to render a jinja2 template',
-    url='https://github.com/pratik141/file_render',
-
     author='Pratik Anand',
     author_email='anandpratik141@gmail.com',
 
-    license='GNU General Public License v3',
+    license='Apache License Version 2',
 
     classifiers=[
         'Development Status :: 4 - Beta',
 
         'Intended Audience :: Developers',
 
-        'License :: OSI Approved :: GNU General Public License v3',
+        'License :: OSI Approved :: Apache Software License V2',
 
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',

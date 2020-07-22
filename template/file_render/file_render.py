@@ -5,58 +5,79 @@ import getopt
 import yaml
 import sys
 
-def render_data(filename,datafile, outputfile):
-	
+def Merge(dict1, dict2):
+    return {**dict1, **dict2}
+
+
+def render_data(filename,datafile, outputfile,vardict,separator):
+
 	t = open(filename,"r")
 	template_data = t.read()
 	t.close()
 	tdata = Template(template_data)
-	
+
 	d = open(datafile,"r")
 	data = d.read()
 	d.close()
 	
 	data = yaml.load(data, yaml.SafeLoader)
-	odata = tdata.render(data)
+	odata = tdata.render(Merge(data, vardict))
 
-	f = open(outputfile, "w")
-	f.write(odata)
-	f.close()
+	if outputfile != "":
+		f = open(outputfile, "w")
+		f.write(odata)
+		f.close()
 
+	else:
+		print("\n******************OUTPUT******************\n")
+		print(odata)
 
 def main():
 
-	argv     = sys.argv[1:]
-	filename = ""
-	datafile = ""
+	argv       = sys.argv[1:]
+	filename   = ""
+	datafile   = ""
 	outputfile = ""
-	opts, args = getopt.getopt(argv,"h:t:d:o:",["tfile=", "dfile=", "ofile="])
+	vardata    = ""
+	separator  = ":"
+	opts, args = getopt.getopt(argv,"i:d:o:v:s:h",["ifile=", "dfile=", "ofile=","var=", "separator="])
 	
 	if opts == []:
-		print ('file_render -t <template file name> -d <data file name> -o <output file name>')
+		print ('file_render -i <template file name> -d <data file name> -o <output file name>')
 		sys.exit(2)
 
 	for opt, arg in opts:
-
 	  if opt == '-h':
-	     print ('[HELP] file_render  -t <template file name> -d <data file name> -o <output file name>')
-	     sys.exit()
+	    print ('[HELP] file_render  -i <template file name> -d <data file name> -o <output file name>')
+	    sys.exit()
 
-	  elif opt in ("-t", "--tfile"):
-	     filename = arg
+	  elif opt in ("-i", "--ifile"):
+		filename = arg
 
 	  elif opt in ("-d", "--dfile"):
-	     datafile = arg
+		datafile = arg
 
 	  elif opt in ("-o", "--ofile"):
-	     outputfile = arg
+		outputfile = arg
+
+	  elif opt in ("-v", "--var"):
+		vardata = arg
+
+	  elif opt in ("-s", "--separator"):
+		separator = arg
 
 
-	print ('template file is :', filename)
-	print ('data file is     :', datafile)
-	print ('output file is   :', outputfile)
-	render_data(filename, datafile, outputfile)
+	print (' input file :', filename)
+	print ('  data file :', datafile)
+	print ('output file :', outputfile)
 
+	if vardata != "":
+		vardict = dict((x.strip(), y.strip())
+			for x, y in (element.split(separator)
+			for element in vardata.split(',')))
+	else:
+		vardict = {}
+	render_data(filename, datafile, outputfile,vardict,separator)
 
 if __name__ == "__main__":
    main()

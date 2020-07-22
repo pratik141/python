@@ -14,8 +14,8 @@ Usage
 -----
 
 ``` bash
-
-    file_render -t <template file name> -d <data file name> -o <output file name>
+    file_render -i <input file name> -d <data file name> -o <output file name> -v <pass run time data >(Optional)
+    Ex: file_render -i data.xml  -d input.yaml  -o abc.xml -v=key:val,key2:val2
 ``` 
 
 Example
@@ -43,7 +43,7 @@ Rendering the template file:
 
 ``` bash
 
-  file_render -t template.j2  -d data.yml -o output.yml
+  file_render -i template.j2  -d data.yml -o output.yml
 ``` 
 Result:
 
