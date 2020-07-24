@@ -7,11 +7,6 @@ Setup file_render
 from os import path
 from setuptools import setup
 
-HERE = path.abspath(path.dirname(__file__))
-
-with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
-    LONG_DESCRIPTION = f.read()
-
 setup(
     description='Load variables from YAML-formatted files to render a jinja2 template',
     author='Pratik Anand',
@@ -37,11 +32,10 @@ setup(
 
     keywords='jinja2 template',
 
-    package_dir={'': 'file_render'},
 
     py_modules=[
-        'file_render',
-    ],
+            'file_render'
+        ],
 
     install_requires=[
         'jinja2',
@@ -59,7 +53,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'file_render=file_render:main',
+            'file_renders=file_render:main',
         ],
     },
 )
