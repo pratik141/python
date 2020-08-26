@@ -40,9 +40,6 @@ def sanitize(inputstr):
 	        inputstr = inputstr.replace(badstr, '')
 	return inputstr
 
-# print (sanitize("inputstr&&jjjkuyui;") )
-
-
 def render_data(filename, datafile, outputfile, vardict, separator):
 
 	""" 
@@ -59,12 +56,14 @@ def render_data(filename, datafile, outputfile, vardict, separator):
 	template_data = t.read()
 	t.close()
 	tdata = Template(template_data)
+	if datafile != "":
+		d = open(datafile,"r")
+		data = d.read()
+		d.close()
+		data = yaml.load(data, yaml.SafeLoader)
+	else:
+		data = {}
 
-	d = open(datafile,"r")
-	data = d.read()
-	d.close()
-	
-	data = yaml.load(data, yaml.SafeLoader)
 	odata = tdata.render(dict_merge(data, vardict))
 
 	if outputfile != "":
